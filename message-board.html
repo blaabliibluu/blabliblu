@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Me Your Message</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/main.css">
+    
+    <style>
+        .message-section {
+            padding: 80px 0 120px;
+            min-height: 100vh;
+        }
+
+        .message-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .message-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .message-form-container {
+            background: rgba(10, 22, 40, 0.85);
+            backdrop-filter: blur(15px);
+            border: 2px solid var(--emerald-accent);
+            border-radius: 16px;
+            padding: 50px;
+            margin-bottom: 60px;
+            box-shadow: var(--shadow-strong);
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        .form-label {
+            display: block;
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        .form-textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 20px;
+            background: rgba(30, 58, 95, 0.5);
+            border: 2px solid var(--sapphire-accent);
+            border-radius: 10px;
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            line-height: 1.8;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--emerald-accent);
+            box-shadow: var(--glow-emerald);
+            background: rgba(30, 58, 95, 0.7);
+        }
+
+        .form-textarea::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.6;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+        }
+
+        .success-message {
+            display: none;
+            padding: 20px;
+            background: rgba(5, 150, 105, 0.2);
+            border: 2px solid var(--emerald-accent);
+            border-radius: 10px;
+            color: var(--emerald-light);
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
+            text-align: center;
+            margin-top: 20px;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .success-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            animation: pulseGlow 1.5s infinite;
+        }
+
+        .messages-display {
+            margin-top: 80px;
+        }
+
+        .messages-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--text-primary);
+        }
+
+        .message-card {
+            background: rgba(10, 22, 40, 0.75);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--sapphire-accent);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .message-card:hover {
+            border-color: var(--emerald-accent);
+            box-shadow: var(--glow-emerald);
+            transform: translateX(5px);
+        }
+
+        .message-text {
+            font-family: 'Lora', serif;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        .message-date {
+            font-size: 0.9rem;
+            color: var(--emerald-accent);
+            font-family: 'Lora', serif;
+            font-style: italic;
+        }
+
+        .no-messages {
+            text-align: center;
+            color: var(--text-secondary);
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
+            padding: 40px;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .message-form-container {
+                padding: 35px 25px;
+            }
+
+            .form-textarea {
+                min-height: 180px;
+                padding: 18px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="section message-section">
+        <!-- Floating Motifs -->
+        <div class="floating-motif" style="top: 12%; right: 6%;">
+            <div class="motif-circle"></div>
+        </div>
+        <div class="floating-motif" style="top: 60%; left: 4%;">
+            <div class="motif-diamond"></div>
+        </div>
+        
+        <div class="container">
+            <div class="message-container">
+                <div class="message-header fade-in-up">
+                    <h1>Your Turn to Speak</h1>
+                    <div class="accent-line accent-line-center"></div>
+                    <p style="color: var(--text-secondary); font-size: 1.2rem; margin-top: 20px;">
+                        I've shared my heart with you. Now I want to hear from yours.
+                    </p>
+                </div>
+
+                <div class="message-form-container">
+                    <form id="messageForm">
+                        <div class="form-group">
+                            <label class="form-label" for="messageText">
+                                <i class="fas fa-pen-fancy" style="margin-right: 10px; color: var(--emerald-accent);"></i>
+                                Your Message
+                            </label>
+                            <textarea 
+                                id="messageText" 
+                                class="form-textarea" 
+                                placeholder="Write your thoughts, feelings, or response here..."
+                                required
+                            ></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary submit-btn">
+                            Send Message <i class="fas fa-paper-plane" style="margin-left: 10px;"></i>
+                        </button>
+
+                        <div class="success-message" id="successMessage">
+                            <div class="success-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div>Your message has been received. Thank you for sharing your heart with me.</div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="messages-display">
+                    <h2 class="messages-title">Previous Messages</h2>
+                    <div class="accent-line accent-line-center" style="margin-bottom: 40px;"></div>
+                    <div id="messagesContainer">
+                        <div class="no-messages">No messages yet. Be the first to share your thoughts.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Music Player Script -->
+    <script src="js/music-player.js"></script>
+
+    <script src="js/message-board.js"></script>
+</body>
+</html>

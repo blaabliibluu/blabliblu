@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Memory Lane</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/main.css">
+    
+    <style>
+        .memory-section {
+            padding: 100px 0;
+        }
+
+        .memory-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .memory-title {
+            margin-bottom: 20px;
+        }
+
+        .memory-subtitle {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .memories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .memory-card {
+            background: rgba(10, 22, 40, 0.85);
+            backdrop-filter: blur(15px);
+            border: 2px solid var(--sapphire-accent);
+            border-radius: 12px;
+            padding: 40px;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .memory-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(5, 150, 105, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .memory-card:hover::before {
+            left: 100%;
+        }
+
+        .memory-card:hover {
+            border-color: var(--emerald-accent);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--glow-emerald);
+        }
+
+        .memory-icon {
+            font-size: 3rem;
+            color: var(--emerald-accent);
+            margin-bottom: 25px;
+            display: inline-block;
+            transition: all 0.4s ease;
+        }
+
+        .memory-card:hover .memory-icon {
+            transform: scale(1.1) rotate(5deg);
+            color: var(--emerald-light);
+        }
+
+        .memory-card-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .memory-teaser {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .memory-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(5, 150, 105, 0.2);
+            border: 1px solid var(--emerald-accent);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--emerald-light);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        /* Modal for Memory Details */
+        .memory-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .memory-modal.active {
+            display: flex;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, var(--sapphire-dark), var(--emerald-dark));
+            border: 2px solid var(--emerald-accent);
+            border-radius: 16px;
+            padding: 50px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideInUp 0.5s ease;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: 2px solid var(--text-secondary);
+            color: var(--text-secondary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            border-color: var(--emerald-accent);
+            color: var(--emerald-light);
+            transform: rotate(90deg);
+        }
+
+        .modal-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .modal-text {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--text-secondary);
+        }
+
+        .continue-btn {
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .memories-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .memory-card {
+                padding: 30px;
+            }
+
+            .modal-content {
+                padding: 30px;
+            }
+
+            .modal-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="section memory-section">
+        <!-- Floating Motifs -->
+        <div class="floating-motif" style="top: 5%; right: 5%;">
+            <div class="motif-circle"></div>
+        </div>
+        <div class="floating-motif" style="top: 50%; left: 3%;">
+            <div class="motif-diamond"></div>
+        </div>
+        
+        <div class="container">
+            <div class="memory-header fade-in-up">
+                <h1 class="memory-title">This place exists because of a few conversations that meant more than they should have.</h1>
+                <div class="accent-line accent-line-center"></div>
+                <p class="memory-subtitle">
+                    Some people leave marks on places.
+                    You left them on moments.
+                    On late nights, random thoughts, unfinished sentences, and songs never used to notice before.
+                </p>
+            </div>
+
+            <div class="memories-grid">
+                <!-- Memory Card 1 -->
+                <div class="memory-card" data-memory="1">
+                    <div class="memory-icon">
+                        <i class="fas fa-coffee"></i>
+                    </div>
+                    <h3 class="memory-card-title">The First Hello</h3>
+                    <p class="memory-teaser">
+                        It started with a simple “hey”… 
+                        and somehow became everything.
+                    </p>
+                    <span class="memory-badge">Click to reveal</span>
+                </div>
+
+                <!-- Memory Card 2 -->
+                <div class="memory-card" data-memory="2">
+                    <div class="memory-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="memory-card-title">The first video call that wasn’t planned at all.</h3>
+                    <p class="memory-teaser">
+                        It wasn’t supposed to be anything important.
+                        No preparation, no occasion, no reason.
+                    </p>
+                    <span class="memory-badge">Click to reveal</span>
+                </div>
+
+                <!-- Memory Card 3 -->
+                <div class="memory-card" data-memory="3">
+                    <div class="memory-icon">
+                        <i class="fas fa-laugh-beam"></i>
+                    </div>
+                    <h3 class="memory-card-title">The voice notes that felt like more than songs.</h3>
+                    <p class="memory-teaser">
+                        Sometimes, out of nowhere, a voice note would appear.
+                    </p>
+                    <span class="memory-badge">Click to reveal</span>
+                </div>
+
+                <!-- Memory Card 4 -->
+                <div class="memory-card" data-memory="4">
+                    <div class="memory-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3 class="memory-card-title">Our rapid-fire rounds</h3>
+                    <p class="memory-teaser">
+                        There were days
+                        when neither of us really had anything to say.
+                    </p>
+                    <span class="memory-badge">Click to reveal</span>
+                </div>
+
+                <!-- Memory Card 5 -->
+                <div class="memory-card" data-memory="5">
+                    <div class="memory-icon">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <h3 class="memory-card-title">The book we almost wrote about us.</h3>
+                    <p class="memory-teaser">
+                        I don’t even remember
+                        how that idea came up.
+                    </p>
+                    <span class="memory-badge">Click to reveal</span>
+                </div>
+
+                <!-- Memory Card 6 -->
+                <div class="memory-card" data-memory="6">
+                    <div class="memory-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3 class="memory-card-title">The realization I didn’t notice at first.</h3>
+                    <p class="memory-teaser">
+                        The moment I knew you were the one. Everything suddenly made sense...
+                    </p>
+                    <span class="memory-badge">Click to reveal</span>
+                </div>
+            </div>
+
+            <div class="continue-btn">
+                <button class="btn btn-primary" onclick="window.location.href='quiz.html'">
+                    Lets see what more do we have. <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Memory Modal -->
+    <div class="memory-modal" id="memoryModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 class="modal-title" id="modalTitle"></h2>
+            <div class="accent-line"></div>
+            <p class="modal-text" id="modalText"></p>
+        </div>
+    </div>
+
+    <!-- Music Player Script -->
+    <script src="js/music-player.js"></script>
+
+    <script src="js/memories.js"></script>
+</body>
+</html>

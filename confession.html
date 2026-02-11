@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Confession</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/main.css">
+    
+    <style>
+        .confession-section {
+            padding: 100px 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .confession-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .confession-icon {
+            font-size: 5rem;
+            color: var(--emerald-accent);
+            margin-bottom: 40px;
+            animation: pulseGlow 2.5s infinite;
+        }
+
+        .confession-content {
+            background: rgba(10, 22, 40, 0.85);
+            backdrop-filter: blur(15px);
+            border: 2px solid var(--emerald-accent);
+            border-radius: 16px;
+            padding: 60px;
+            box-shadow: var(--shadow-strong);
+        }
+
+        .typing-line {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: var(--emerald-light);
+            margin-bottom: 40px;
+            min-height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.2em;
+            background: var(--emerald-accent);
+            margin-left: 5px;
+            animation: blink 0.8s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .confession-text {
+            font-family: 'Lora', serif;
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            line-height: 2.2;
+            color: var(--text-secondary);
+            text-align: left;
+            margin-bottom: 30px;
+            opacity: 0;
+        }
+
+        .confession-text.visible {
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .confession-text:nth-child(3) { animation-delay: 0.3s; }
+        .confession-text:nth-child(4) { animation-delay: 0.6s; }
+        .confession-text:nth-child(5) { animation-delay: 0.9s; }
+        .confession-text:nth-child(6) { animation-delay: 1.2s; }
+        .confession-text:nth-child(7) { animation-delay: 1.5s; }
+
+        .confession-signature {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-style: italic;
+            color: var(--emerald-light);
+            margin-top: 50px;
+            opacity: 0;
+        }
+
+        .confession-signature.visible {
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 1.8s;
+        }
+
+        .heart-decoration {
+            display: inline-block;
+            color: var(--emerald-accent);
+            margin: 0 10px;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            10%, 30% { transform: scale(1.1); }
+            20%, 40% { transform: scale(1); }
+        }
+
+        .final-cta {
+            margin-top: 60px;
+            opacity: 0;
+        }
+
+        .final-cta.visible {
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 2.1s;
+        }
+
+        @media (max-width: 768px) {
+            .confession-content {
+                padding: 40px 30px;
+            }
+
+            .confession-icon {
+                font-size: 3.5rem;
+            }
+
+            .typing-line {
+                font-size: 1.5rem;
+            }
+
+            .confession-text {
+                font-size: 1.05rem;
+                line-height: 1.9;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="section confession-section">
+        <!-- Floating Motifs -->
+        <div class="floating-motif" style="top: 10%; left: 5%;">
+            <div class="motif-circle"></div>
+        </div>
+        <div class="floating-motif" style="bottom: 10%; right: 5%;">
+            <div class="motif-diamond"></div>
+        </div>
+        
+        <div class="container">
+            <div class="confession-container">
+                <div class="confession-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+
+                <div class="confession-content">
+                    <div class="typing-line" id="typingLine">
+                        <span id="typedText"></span>
+                        <span class="typing-cursor" id="cursor"></span>
+                    </div>
+
+                    <div class="accent-line accent-line-center"></div>
+
+                    <p class="confession-text">
+                        I've walked you through our memories, made you laugh with our quiz, shared my heart through letters, and listed fifty reasons why you mean the world to me. But there's one more thing I need to say, and it's the most important thing of all. I’ve been holding this inside me for a long time, and I think it’s finally time you know. I love you baby i really do.
+                    </p>
+
+                    <p class="confession-text">
+                        From the moment you entered my life, everything changed. I know you’ve been waiting for this, and I’m sorry it took me time. Not because my feelings were unsure, but because they were deep and deep things take courage to say out loud. You matter to me more than you realize. Your presence, your patience, the way you care… none of it ever went unnoticed.
+                    </p>
+
+                    <p class="confession-text">
+                        I love the way you make me feel—seen, heard, valued, and cherished. I love how we can talk for hours or sit in comfortable silence. I love how you challenge me, support me, and believe in me even when I don't believe in myself.
+                    </p>
+
+                    <p class="confession-text">
+                        You've shown me what real love looks like. It's not just the grand gestures or the perfect moments. It's the everyday choice to be there, to care, to grow together. It's the way you look at me, the way you hold me near, the way you make everything better just by existing.
+                    </p>
+
+                    <p class="confession-text">
+                        No matter what people say about long distance that it’s hard, that it doesn’t last, that it fades I believe in us. I know we’ll make this work, not because it’s easy, but because we choose each other every single day. The distance may test us, but it can’t touch what we’ve built with trust, patience, and love. We’re stronger than the miles between us, and I’m sure of one thing: as long as it’s you and me, we’ll always find our way back to each other. You're the person I choose, today and every day after.
+                    </p>
+
+                    <p class="confession-signature">
+                        <span class="heart-decoration">♥</span>
+                        Forever Yours
+                        <span class="heart-decoration">♥</span>
+                    </p>
+
+                    <div class="final-cta">
+                        <button class="btn btn-primary" onclick="window.location.href='message-board.html'">
+                            Leave Me a Message <i class="fas fa-envelope" style="margin-left: 10px;"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Music Player Script -->
+    <script src="js/music-player.js"></script>
+
+    <script>
+        // Typing Animation for First Line
+        const textToType = "I'm so in love with you";
+        const typedTextElement = document.getElementById('typedText');
+        const cursorElement = document.getElementById('cursor');
+        let charIndex = 0;
+
+        function typeText() {
+            if (charIndex < textToType.length) {
+                typedTextElement.textContent += textToType.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeText, 100); // Typing speed
+            } else {
+                // Remove cursor after typing is complete
+                setTimeout(() => {
+                    cursorElement.style.display = 'none';
+                    // Show the rest of the content
+                    showConfessionContent();
+                }, 500);
+            }
+        }
+
+        function showConfessionContent() {
+            const confessionTexts = document.querySelectorAll('.confession-text');
+            const signature = document.querySelector('.confession-signature');
+            const cta = document.querySelector('.final-cta');
+
+            confessionTexts.forEach(text => {
+                text.classList.add('visible');
+            });
+
+            signature.classList.add('visible');
+            cta.classList.add('visible');
+        }
+
+        // Start typing animation when page loads
+        window.addEventListener('load', () => {
+            setTimeout(typeText, 800);
+        });
+    </script>
+</body>
+</html>

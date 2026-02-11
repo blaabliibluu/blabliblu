@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>50 Reasons Why I Love You</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/main.css">
+    
+    <style>
+        .reasons-section {
+            padding: 80px 0 120px;
+            min-height: 100vh;
+        }
+
+        .reasons-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1400px;
+            margin: 0 auto 80px;
+        }
+
+        .reason-card {
+            background: rgba(10, 22, 40, 0.75);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--sapphire-accent);
+            border-radius: 10px;
+            padding: 30px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: default;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reason-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--emerald-accent), var(--gold-accent), var(--emerald-accent));
+            background-size: 200% 200%;
+            border-radius: 10px;
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.4s ease;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .reason-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: transparent;
+            box-shadow: var(--glow-emerald);
+        }
+
+        .reason-card:hover::before {
+            opacity: 1;
+        }
+
+        .reason-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--emerald-accent);
+            margin-bottom: 15px;
+            line-height: 1;
+        }
+
+        .reason-text {
+            font-family: 'Lora', serif;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        .continue-section {
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        /* Reveal on Scroll Animation */
+        .reason-card {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .reason-card.revealed {
+            animation: revealCard 0.6s ease forwards;
+        }
+
+        @keyframes revealCard {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Celebration Animation Container */
+        .celebration-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9998;
+            display: none;
+        }
+
+        .celebration-container.active {
+            display: block;
+        }
+
+        /* Confetti/Hearts Animation */
+        .celebration-item {
+            position: absolute;
+            font-size: 2rem;
+            animation: popAndFall 4s ease-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes popAndFall {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) scale(0) rotate(0deg);
+            }
+            10% {
+                opacity: 1;
+                transform: translateY(80vh) scale(1.5) rotate(180deg);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(30vh) scale(1) rotate(360deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-20vh) scale(0.5) rotate(720deg);
+            }
+        }
+
+        /* Celebration Message Popup */
+        .celebration-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: rgba(10, 22, 40, 0.95);
+            backdrop-filter: blur(20px);
+            border: 3px solid var(--emerald-accent);
+            border-radius: 20px;
+            padding: 60px;
+            text-align: center;
+            z-index: 9999;
+            box-shadow: 0 0 60px rgba(5, 150, 105, 0.6);
+            opacity: 0;
+            pointer-events: none;
+            max-width: 600px;
+        }
+
+        .celebration-message.active {
+            animation: popIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+            pointer-events: auto;
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0) rotate(-180deg);
+            }
+            70% {
+                transform: translate(-50%, -50%) scale(1.1) rotate(10deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+            }
+        }
+
+        .celebration-icon {
+            font-size: 5rem;
+            color: var(--emerald-accent);
+            margin-bottom: 20px;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        .celebration-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--emerald-light);
+        }
+
+        .celebration-text {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .reasons-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+
+            .reason-card {
+                padding: 25px;
+            }
+
+            .reason-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Motifs -->
+    <div class="floating-motif" style="top: 5%; right: 8%;">
+        <div class="motif-circle"></div>
+    </div>
+    <div class="floating-motif" style="top: 40%; left: 3%;">
+        <div class="motif-diamond"></div>
+    </div>
+    
+    <!-- Celebration Container -->
+    <div class="celebration-container" id="celebrationContainer"></div>
+    
+    <!-- Celebration Message -->
+    <div class="celebration-message" id="celebrationMessage">
+        <div class="celebration-icon">
+            <i class="fas fa-heart"></i>
+        </div>
+        <h2 class="celebration-title">All 50 Reasons!</h2>
+        <div class="accent-line accent-line-center"></div>
+        <p class="celebration-text">
+            All these and I could still keep going.
+        </p>
+        <button class="btn btn-primary" onclick="closeCelebration()">
+            maybe its the end? <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
+        </button>
+    </div>
+    
+    <div class="section reasons-section">
+        <div class="container">
+            <div class="reasons-header fade-in-up">
+                <h1>50 small things I noticed about you.</h1>
+                <div class="accent-line accent-line-center"></div>
+                <p style="color: var(--text-secondary); font-size: 1.2rem; margin-top: 20px;">
+                    I could write a thousand, but here are fifty that come from the deepest part of my heart
+                </p>
+            </div>
+
+            <div class="reasons-grid" id="reasonsGrid">
+                <!-- Reasons will be dynamically generated -->
+            </div>
+
+            <div class="continue-section">
+                <button class="btn btn-primary" onclick="window.location.href='confession.html'">
+                    bla bli blu! <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Music Player Script -->
+    <script src="js/music-player.js"></script>
+
+    <script>
+        const reasons = [
+            "Your smile lights up my entire world",
+            "The way you understand me without words",
+            "How you make me laugh even on my worst days",
+            "Your voice when you’re relaxed.",
+            "The comfort I feel in your presence",
+            "How you challenge me to be better",
+            "Your kindness towards everyone you meet",
+            "The way you listen when I need to talk",
+            "Your strength during difficult times",
+            "How you see the best in people",
+            "The little things you do to show you care",
+            "Your passion for what you love",
+            "How you make ordinary moments extraordinary",
+            "Your honesty, even when it's hard",
+            "The way you hold me close",
+            "Your courage to be vulnerable with me",
+            "How you celebrate my victories",
+            "The depth of your compassion",
+            "Your ability to make me feel safe",
+            "The way you make people feel chosen.",
+            "The sound of your laughter",
+            "Your dedication to what matters",
+            "The way you stay, even when conversations get quiet.",
+            "The way you look at me",
+            "Your gentle heart",
+            "How you accept all of me",
+            "The way you say certain words.",
+            "Your wisdom in moments of confusion",
+            "Your laugh, especially when it’s unexpected.",
+            "The peace I feel when we're together",
+            "How silence with you doesn’t feel awkward.",
+            "How you make me feel valued",
+            "Your curiosity about things that interest you.",
+            "Your patience with my flaws",
+            "How you turn my house into a home",
+            "The memories we've created",
+            "How you try to comfort others in your own way.",
+            "The comfort of seeing your name on my screen.",
+            "The way you communicate with me",
+            "Your respect for who I am",
+            "Your kindness to people who can’t offer you anything back.",
+            "Your calm energy during stressful moments.",
+            "The way you think before you speak.",
+            "How you make me feel understood",
+            "our voice notes—they feel more personal than texts.",
+            "Your small habits that make you unmistakably you.",
+            "Your silly side that appears when you’re comfortable.",
+            "The way you exist in my thoughts more often than you know.",
+            "The fact that this list exists at all… because of you.",
+            "Because you're you, and that's everything"
+        ];
+
+        const reasonsGrid = document.getElementById('reasonsGrid');
+
+        // Generate reason cards
+        reasons.forEach((reason, index) => {
+            const card = document.createElement('div');
+            card.className = 'reason-card';
+            card.innerHTML = `
+                <div class="reason-number">${index + 1}</div>
+                <div class="reason-text">${reason}</div>
+            `;
+            reasonsGrid.appendChild(card);
+        });
+
+        // Reveal on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all reason cards with stagger
+        let revealedCount = 0;
+        let celebrationTriggered = false;
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.reason-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.03}s`;
+                observer.observe(card);
+                
+                // Listen for when card is revealed
+                card.addEventListener('animationend', () => {
+                    revealedCount++;
+                    
+                    // Trigger celebration when all 50 are revealed
+                    if (revealedCount === 50 && !celebrationTriggered) {
+                        celebrationTriggered = true;
+                        setTimeout(triggerCelebration, 500);
+                    }
+                });
+            });
+        });
+        
+        // Celebration Animation
+        function triggerCelebration() {
+            const container = document.getElementById('celebrationContainer');
+            const message = document.getElementById('celebrationMessage');
+            
+            // Show celebration container
+            container.classList.add('active');
+            
+            // Create hearts and confetti
+            const symbols = ['💙', '💚', '✨', '💎', '⭐', '💫'];
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const item = document.createElement('div');
+                    item.className = 'celebration-item';
+                    item.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                    item.style.left = Math.random() * 100 + '%';
+                    item.style.animationDelay = Math.random() * 0.5 + 's';
+                    item.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                    container.appendChild(item);
+                    
+                    // Remove after animation
+                    setTimeout(() => item.remove(), 5000);
+                }, i * 50);
+            }
+            
+            // Show message after brief delay
+            setTimeout(() => {
+                message.classList.add('active');
+            }, 1000);
+        }
+        
+        function closeCelebration() {
+            const container = document.getElementById('celebrationContainer');
+            const message = document.getElementById('celebrationMessage');
+            
+            message.classList.remove('active');
+            
+            setTimeout(() => {
+                container.classList.remove('active');
+                container.innerHTML = ''; // Clear all items
+            }, 500);
+        }
+    </script>
+</body>
+</html>

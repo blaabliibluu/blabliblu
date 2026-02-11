@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Someone Special</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/main.css">
+    
+    <style>
+        .unlock-screen {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .unlock-container {
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .unlock-icon {
+            font-size: 4rem;
+            color: var(--emerald-accent);
+            margin-bottom: 30px;
+            animation: pulseGlow 2s infinite;
+        }
+
+        .unlock-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--emerald-light), var(--gold-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .unlock-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 50px;
+            font-family: 'Lora', serif;
+        }
+
+        .unlock-form {
+            margin-top: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .form-label {
+            display: block;
+            font-family: 'Lora', serif;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 18px 24px;
+            background: rgba(10, 22, 40, 0.6);
+            border: 2px solid var(--sapphire-accent);
+            border-radius: 8px;
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--emerald-accent);
+            box-shadow: var(--glow-emerald);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.6;
+        }
+
+        .unlock-btn {
+            width: 100%;
+            padding: 18px;
+            margin-top: 30px;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+        }
+
+        .error-message {
+            display: none;
+            color: #ef4444;
+            font-family: 'Lora', serif;
+            font-size: 0.95rem;
+            margin-top: 15px;
+            padding: 12px;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 6px;
+        }
+
+        .error-message.show {
+            display: block;
+            animation: fadeInUp 0.4s ease;
+        }
+
+        /* Decorative Elements */
+        .geometric-accent {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 2px solid var(--emerald-accent);
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .geometric-accent-1 {
+            top: 10%;
+            left: 5%;
+            transform: rotate(45deg);
+        }
+
+        .geometric-accent-2 {
+            bottom: 10%;
+            right: 5%;
+            transform: rotate(25deg);
+            border-radius: 50%;
+        }
+
+        @media (max-width: 768px) {
+            .unlock-icon {
+                font-size: 3rem;
+            }
+
+            .geometric-accent {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="unlock-screen">
+        <!-- Floating Motifs -->
+        <div class="floating-motif" style="top: 10%; left: 8%;">
+            <div class="motif-circle"></div>
+        </div>
+        <div class="floating-motif" style="bottom: 15%; right: 10%;">
+            <div class="motif-diamond"></div>
+        </div>
+        
+        <!-- Geometric Accents -->
+        <div class="geometric-accent geometric-accent-1"></div>
+        <div class="geometric-accent geometric-accent-2"></div>
+
+        <div class="unlock-container">
+            <div class="unlock-icon">
+                <i class="fas fa-lock"></i>
+            </div>
+
+            <h1 class="unlock-title">Hey there, love</h1>
+            <div class="accent-line accent-line-center"></div>
+            <p class="unlock-subtitle">Mhmm you think i'll let you in so easily, huh answer this </p>
+
+            <form class="unlock-form" id="unlockForm">
+                <div class="form-group">
+                    <label class="form-label" for="answer">What is the nickname i call you with</label>
+                    <input 
+                        type="text" 
+                        id="answer" 
+                        class="form-input" 
+                        placeholder="Enter your answer..."
+                        autocomplete="off"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="btn btn-primary unlock-btn">
+                    Unlock <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
+                </button>
+
+                <div class="error-message" id="errorMessage">
+                    <i class="fas fa-exclamation-circle"></i> 
+                    MHmm, that's not quite right. rudeee..
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Music Player Script -->
+    <script src="js/music-player.js"></script>
+
+    <script>
+        // Password/Unlock Logic
+        const unlockForm = document.getElementById('unlockForm');
+        const answerInput = document.getElementById('answer');
+        const errorMessage = document.getElementById('errorMessage');
+
+        // CUSTOMIZE THIS: Set your secret answer (case-insensitive)
+        const correctAnswer = 'Amoree'; // Change this to your actual answer
+
+        unlockForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const userAnswer = answerInput.value.trim().toLowerCase();
+            
+            if (userAnswer === correctAnswer.toLowerCase()) {
+                // Correct answer - smooth transition
+                document.body.style.opacity = '0';
+                document.body.style.transition = 'opacity 0.5s ease';
+                
+                setTimeout(() => {
+                    window.location.href = 'memory-lane.html';
+                }, 500);
+            } else {
+                // Wrong answer - show error
+                errorMessage.classList.add('show');
+                answerInput.style.borderColor = '#ef4444';
+                
+                // Shake animation
+                answerInput.style.animation = 'shake 0.5s';
+                setTimeout(() => {
+                    answerInput.style.animation = '';
+                }, 500);
+            }
+        });
+
+        // Clear error on input
+        answerInput.addEventListener('input', () => {
+            errorMessage.classList.remove('show');
+            answerInput.style.borderColor = 'var(--sapphire-accent)';
+        });
+
+        // Shake animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-10px); }
+                75% { transform: translateX(10px); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
